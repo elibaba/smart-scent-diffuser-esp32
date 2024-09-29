@@ -1,0 +1,120 @@
+alias: Spray Srakhrakhok and Deep Sleep
+description: ""
+trigger:
+  - platform: time
+    at: "07:15:30"
+  - platform: time
+    at: "11:00:30"
+  - platform: time
+    at: "13:00:30"
+  - platform: time
+    at: "15:00:30"
+  - platform: time
+    at: "17:00:30"
+  - platform: time
+    at: "19:00:30"
+  - platform: time
+    at: "21:00:30"
+action:
+  - target:
+      entity_id: switch.srakhrakhok
+    action: switch.turn_on
+    data: {}
+  - choose:
+      - conditions:
+          - condition: time
+            after: "21:00:00"
+        sequence:
+          - target:
+              entity_id: number.deep_sleep_duration
+            data:
+              value: "597"
+            action: number.set_value
+          - target:
+              entity_id: switch.deep_sleep
+            action: switch.turn_on
+            data: {}
+      - conditions:
+          - condition: time
+            after: "19:00:00"
+            before: "21:00:00"
+        sequence:
+          - target:
+              entity_id: number.deep_sleep_duration
+            data:
+              value: "119"
+            action: number.set_value
+          - target:
+              entity_id: switch.deep_sleep
+            action: switch.turn_on
+            data: {}
+      - conditions:
+          - condition: time
+            after: "17:00:00"
+            before: "19:00:00"
+        sequence:
+          - target:
+              entity_id: number.deep_sleep_duration
+            data:
+              value: "119"
+            action: number.set_value
+          - target:
+              entity_id: switch.deep_sleep
+            action: switch.turn_on
+            data: {}
+      - conditions:
+          - condition: time
+            after: "15:00:00"
+            before: "17:00:00"
+        sequence:
+          - target:
+              entity_id: number.deep_sleep_duration
+            data:
+              value: "119"
+            action: number.set_value
+          - target:
+              entity_id: switch.deep_sleep
+            action: switch.turn_on
+            data: {}
+      - conditions:
+          - condition: time
+            after: "13:00:00"
+            before: "15:00:00"
+        sequence:
+          - target:
+              entity_id: number.deep_sleep_duration
+            data:
+              value: "119"
+            action: number.set_value
+          - target:
+              entity_id: switch.deep_sleep
+            action: switch.turn_on
+            data: {}
+      - conditions:
+          - condition: time
+            after: "11:00:00"
+            before: "13:00:00"
+        sequence:
+          - target:
+              entity_id: number.deep_sleep_duration
+            data:
+              value: "119"
+            action: number.set_value
+          - target:
+              entity_id: switch.deep_sleep
+            action: switch.turn_on
+            data: {}
+      - conditions:
+          - condition: time
+            after: "07:15:00"
+            before: "11:00:00"
+        sequence:
+          - target:
+              entity_id: number.deep_sleep_duration
+            data:
+              value: "224"
+            action: number.set_value
+          - target:
+              entity_id: switch.deep_sleep
+            action: switch.turn_on
+            data: {}
