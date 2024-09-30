@@ -30,10 +30,10 @@ action:
             data:
               value: "597"
             action: number.set_value
-          - target:
-              entity_id: switch.deep_sleep
-            action: switch.turn_on
+          - action: switch.turn_on
             data: {}
+            target:
+              entity_id: switch.scent_diffuser_srakhrakhok_deep_sleep
       - conditions:
           - condition: time
             after: "19:00:00"
@@ -44,10 +44,10 @@ action:
             data:
               value: "119"
             action: number.set_value
-          - target:
-              entity_id: switch.deep_sleep
-            action: switch.turn_on
+          - action: switch.turn_on
             data: {}
+            target:
+              entity_id: switch.scent_diffuser_srakhrakhok_deep_sleep
       - conditions:
           - condition: time
             after: "17:00:00"
@@ -58,10 +58,10 @@ action:
             data:
               value: "119"
             action: number.set_value
-          - target:
-              entity_id: switch.deep_sleep
-            action: switch.turn_on
+          - action: switch.turn_on
             data: {}
+            target:
+              entity_id: switch.scent_diffuser_srakhrakhok_deep_sleep
       - conditions:
           - condition: time
             after: "15:00:00"
@@ -72,10 +72,10 @@ action:
             data:
               value: "119"
             action: number.set_value
-          - target:
-              entity_id: switch.deep_sleep
-            action: switch.turn_on
+          - action: switch.turn_on
             data: {}
+            target:
+              entity_id: switch.scent_diffuser_srakhrakhok_deep_sleep
       - conditions:
           - condition: time
             after: "13:00:00"
@@ -86,10 +86,10 @@ action:
             data:
               value: "119"
             action: number.set_value
-          - target:
-              entity_id: switch.deep_sleep
-            action: switch.turn_on
+          - action: switch.turn_on
             data: {}
+            target:
+              entity_id: switch.scent_diffuser_srakhrakhok_deep_sleep
       - conditions:
           - condition: time
             after: "11:00:00"
@@ -100,10 +100,10 @@ action:
             data:
               value: "119"
             action: number.set_value
-          - target:
-              entity_id: switch.deep_sleep
-            action: switch.turn_on
+          - action: switch.turn_on
             data: {}
+            target:
+              entity_id: switch.scent_diffuser_srakhrakhok_deep_sleep
       - conditions:
           - condition: time
             after: "07:15:00"
@@ -115,6 +115,7 @@ action:
               value: "224"
             action: number.set_value
           - target:
-              entity_id: switch.deep_sleep
+              entity_id:
+                - switch.scent_diffuser_srakhrakhok_deep_sleep
             action: switch.turn_on
             data: {}
