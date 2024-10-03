@@ -7,21 +7,26 @@ esp32:
   framework:
     type: arduino
 
+# Important bit - sleep duration has to be zero, otherwise it'll go to sleep after run_duration on every wakeup, while I want the sleep duration
+# to eb dynamic according to the deep_sleep_duration number set via the frontend
 deep_sleep:  
-  id: your_deep_sleep
+  id: spray_deep_sleep
+  run_duration: 5min
+  sleep_duration: 0s
+    
 
 # Enable logging
 logger:
-  level: DEBUG
+  level: INFO
 
 # Enable Home Assistant API
 api:
   encryption:
-    key: "yourAPIKeyhere"
+    key: "EJ1d+npk8rcCD1EnY6XZIFQgJSX+kXiMXIXKtWZ7nkE="
 
 ota:
   - platform: esphome
-    password: "yourOTApassword"
+    password: "be92a50c4ba01df6130af8a7fad91053"
 
 wifi:
   ssid: !secret wifi_ssid
@@ -31,7 +36,7 @@ wifi:
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Srakhrakhok Fallback Hotspot"
-    password: "abcdefghi"
+    password: "12345678"
 
 captive_portal:
 
@@ -52,15 +57,15 @@ number:
     name: "Deep Sleep Duration Minutes"
     optimistic: true
     min_value: 1
-    max_value: 720
-    step: 2
+    max_value: 120
+    step: 1
 
 switch:
   - platform: gpio
     pin: GPIO15
     id: srakhrakhok
     inverted: yes
-    name: "Srakhrakhok Spray"
+    name: "Spray"
     on_turn_on:
       - lambda: |-
           id(daily_counter) += 1;
@@ -71,17 +76,30 @@ switch:
       - delay: 2s
 
   - platform: template
-    name: "Reset Counters"
-    id: reset_counters
+    name: "Reset Day Counter"
+    id: reset_day_counter
     turn_on_action:
       - lambda: |-
           id(daily_counter) = 0;
+          ESP_LOGI("main", "Day Counter reset");
+      - delay: 2s
+      - switch.turn_off: reset_day_counter
+      - delay: 2s
+
+  - platform: template
+    name: "Reset Total Counter"
+    id: reset_total_counter
+    turn_on_action:
+      - lambda: |-
           id(total_counter) = 0;
-          ESP_LOGI("main", "Counters reset");
+          ESP_LOGI("main", "Total Counter reset");
+      - delay: 2s
+      - switch.turn_off: reset_total_counter
+      - delay: 2s
 
   # switch for deep sleep
   - platform: template
-    name: "Srakhrakhok Deep Sleep"
+    name: "Deep Sleep"
     id: deep_sleep_switch
     turn_on_action:
       - delay: 1s  # Small delay to ensure the switch action is registered
@@ -89,8 +107,12 @@ switch:
           // Read the number value for sleep duration
           int duration_in_minutes = int(id(deep_sleep_duration).state);
           ESP_LOGI("main", "Entering deep sleep for %d minutes", duration_in_minutes);
-          id(your_deep_sleep).set_sleep_duration(duration_in_minutes*60*1000);
-          id(your_deep_sleep).begin_sleep();
+          id(spray_deep_sleep).set_sleep_duration(duration_in_minutes*60*1000); // convert ms to minutes
+          id(spray_deep_sleep).begin_sleep();
+      - delay: 2s
+      - switch.turn_off: deep_sleep_switch
+      - delay: 2s
+      
 
 sensor:
   - platform: template
