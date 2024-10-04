@@ -7,11 +7,9 @@ esp32:
   framework:
     type: arduino
 
-# Important bit - sleep duration has to be zero, otherwise it'll go to sleep after run_duration on every wakeup, while I want the sleep duration
-# to eb dynamic according to the deep_sleep_duration number set via the frontend
 deep_sleep:  
   id: spray_deep_sleep
-  run_duration: 5min
+  run_duration: 30min
   sleep_duration: 0s
     
 
@@ -57,7 +55,7 @@ number:
     name: "Deep Sleep Duration Minutes"
     optimistic: true
     min_value: 1
-    max_value: 120
+    max_value: 600
     step: 1
 
 switch:
