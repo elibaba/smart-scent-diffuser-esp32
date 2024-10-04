@@ -23,4 +23,6 @@ This uses a pretty simple setup:
 
 # Wiring Diagram
 Instead of the LED, that'll be the motor of the scent diffuser. Just solder 2 leads, one to each contact of the motor.
+
+VCC and ground are the positive and negative terminals of a 2 AA baterry pack (https://aliexpress.com/item/4001194487990.html)
 ![Wiring Diagram](wiring.png)
