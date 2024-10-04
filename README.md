@@ -21,6 +21,6 @@ This uses a pretty simple setup:
 * Daily counter and Total counter of activations
 * Percentage spent, assuming a full can is 1500 sprays
 
-* # Wiring Diagram
+# Wiring Diagram
 Instead of the LED, that'll be the motor of the scent diffuser. Just solder 2 leads, one to each contact of the motor.
 ![Wiring Diagram](wiring.png)
