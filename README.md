@@ -25,4 +25,11 @@ This uses a pretty simple setup:
 Instead of the LED, that'll be the motor of the scent diffuser. Just solder 2 leads, one to each contact of the motor.
 
 VCC and ground are the positive and negative terminals of a 2 AA baterry pack (https://aliexpress.com/item/4001194487990.html)
+
+The ESP32 board is powered by a USB-C cable connected to a power bank, deep sleep is used to conserve power.
+According to my calculations, the power bank should last for well over a year of operation.
+
 ![Wiring Diagram](wiring.png)
+
+
+
