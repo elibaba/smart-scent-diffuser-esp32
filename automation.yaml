@@ -1,121 +1,184 @@
 alias: Spray Srakhrakhok and Deep Sleep
 description: ""
-trigger:
-  - platform: time
-    at: "07:15:30"
-  - platform: time
-    at: "11:00:30"
-  - platform: time
-    at: "13:00:30"
-  - platform: time
-    at: "15:00:30"
-  - platform: time
-    at: "17:00:30"
-  - platform: time
-    at: "19:00:30"
-  - platform: time
-    at: "21:00:30"
-action:
-  - target:
-      entity_id: switch.srakhrakhok
-    action: switch.turn_on
+triggers:
+  - at: "07:15:50"
+    trigger: time
+  - at: "07:45:00"
+    trigger: time
+  - at: "11:00:00"
+    trigger: time
+  - at: "13:00:00"
+    trigger: time
+  - at: "15:00:00"
+    trigger: time
+  - at: "17:00:45"
+    trigger: time
+  - at: "19:00:45"
+    trigger: time
+  - at: "21:01:00"
+    trigger: time
+actions:
+  - action: switch.turn_on
     data: {}
+    target:
+      entity_id: switch.scent_diffuser_spray
   - choose:
       - conditions:
           - condition: time
-            after: "21:00:00"
+            after: "07:15:00"
+            before: "07:45:00"
         sequence:
-          - target:
-              entity_id: number.deep_sleep_duration
-            data:
-              value: "597"
+          - data:
+              value: "27"
             action: number.set_value
+            target:
+              entity_id: number.scent_diffuser_deep_sleep_duration_minutes
           - action: switch.turn_on
             data: {}
             target:
-              entity_id: switch.scent_diffuser_srakhrakhok_deep_sleep
+              entity_id: switch.scent_diffuser_deep_sleep
+          - action: logbook.log
+            metadata: {}
+            data:
+              name: srakhrakhok
+              message: 7:15AM Sleep, 27m until 07:42
+              entity_id: switch.scent_diffuser_deep_sleep
       - conditions:
           - condition: time
-            after: "19:00:00"
-            before: "21:00:00"
+            after: "07:45:00"
+            before: "11:00:00"
         sequence:
-          - target:
-              entity_id: number.deep_sleep_duration
-            data:
-              value: "119"
+          - data:
+              value: "190"
             action: number.set_value
+            target:
+              entity_id: number.scent_diffuser_deep_sleep_duration_minutes
           - action: switch.turn_on
             data: {}
             target:
-              entity_id: switch.scent_diffuser_srakhrakhok_deep_sleep
-      - conditions:
-          - condition: time
-            after: "17:00:00"
-            before: "19:00:00"
-        sequence:
-          - target:
-              entity_id: number.deep_sleep_duration
+              entity_id: switch.scent_diffuser_deep_sleep
+          - action: logbook.log
+            metadata: {}
             data:
-              value: "119"
-            action: number.set_value
-          - action: switch.turn_on
-            data: {}
-            target:
-              entity_id: switch.scent_diffuser_srakhrakhok_deep_sleep
-      - conditions:
-          - condition: time
-            after: "15:00:00"
-            before: "17:00:00"
-        sequence:
-          - target:
-              entity_id: number.deep_sleep_duration
-            data:
-              value: "119"
-            action: number.set_value
-          - action: switch.turn_on
-            data: {}
-            target:
-              entity_id: switch.scent_diffuser_srakhrakhok_deep_sleep
-      - conditions:
-          - condition: time
-            after: "13:00:00"
-            before: "15:00:00"
-        sequence:
-          - target:
-              entity_id: number.deep_sleep_duration
-            data:
-              value: "119"
-            action: number.set_value
-          - action: switch.turn_on
-            data: {}
-            target:
-              entity_id: switch.scent_diffuser_srakhrakhok_deep_sleep
+              name: srakhrakhok
+              message: 7:45AM Sleep, 190m until 10:55
+              entity_id: switch.scent_diffuser_deep_sleep
       - conditions:
           - condition: time
             after: "11:00:00"
             before: "13:00:00"
         sequence:
-          - target:
-              entity_id: number.deep_sleep_duration
-            data:
-              value: "119"
+          - data:
+              value: "118"
             action: number.set_value
+            target:
+              entity_id: number.scent_diffuser_deep_sleep_duration_minutes
           - action: switch.turn_on
             data: {}
             target:
-              entity_id: switch.scent_diffuser_srakhrakhok_deep_sleep
+              entity_id: switch.scent_diffuser_deep_sleep
+          - action: logbook.log
+            metadata: {}
+            data:
+              name: srakhrakhok
+              message: 11AM Sleep, 118m
+              entity_id: switch.scent_diffuser_deep_sleep
       - conditions:
           - condition: time
-            after: "07:15:00"
-            before: "11:00:00"
+            after: "13:00:00"
+            before: "15:00:00"
         sequence:
-          - target:
-              entity_id: number.deep_sleep_duration
-            data:
-              value: "224"
+          - data:
+              value: "117"
             action: number.set_value
-          - target:
-              entity_id:
-                - switch.scent_diffuser_srakhrakhok_deep_sleep
-            action: switch.turn_on
+            target:
+              entity_id: number.scent_diffuser_deep_sleep_duration_minutes
+          - action: switch.turn_on
             data: {}
+            target:
+              entity_id: switch.scent_diffuser_deep_sleep
+          - action: logbook.log
+            metadata: {}
+            data:
+              name: srakhrakhok
+              entity_id: switch.scent_diffuser_deep_sleep
+              message: 1PM Sleep, 117m
+      - conditions:
+          - condition: time
+            after: "15:00:00"
+            before: "17:00:00"
+        sequence:
+          - data:
+              value: "118"
+            action: number.set_value
+            target:
+              entity_id: number.scent_diffuser_deep_sleep_duration_minutes
+          - action: switch.turn_on
+            data: {}
+            target:
+              entity_id: switch.scent_diffuser_deep_sleep
+          - action: logbook.log
+            metadata: {}
+            data:
+              name: srakhrakhok
+              message: 3PM Sleep, 118m
+              entity_id: switch.scent_diffuser_deep_sleep
+      - conditions:
+          - condition: time
+            after: "17:00:00"
+            before: "19:00:00"
+        sequence:
+          - data:
+              value: "115"
+            action: number.set_value
+            target:
+              entity_id: number.scent_diffuser_deep_sleep_duration_minutes
+          - action: switch.turn_on
+            data: {}
+            target:
+              entity_id: switch.scent_diffuser_deep_sleep
+          - action: logbook.log
+            metadata: {}
+            data:
+              name: srakhrakhok
+              message: 5PM Sleep, 115m
+              entity_id: switch.scent_diffuser_deep_sleep
+      - conditions:
+          - condition: time
+            after: "19:00:00"
+            before: "21:00:00"
+        sequence:
+          - data:
+              value: "115"
+            action: number.set_value
+            target:
+              entity_id: number.scent_diffuser_deep_sleep_duration_minutes
+          - action: switch.turn_on
+            data: {}
+            target:
+              entity_id: switch.scent_diffuser_deep_sleep
+          - action: logbook.log
+            metadata: {}
+            data:
+              name: srakhrakhok
+              message: 7PM Sleep, 115m
+              entity_id: switch.scent_diffuser_deep_sleep
+      - conditions:
+          - condition: time
+            after: "21:00:00"
+        sequence:
+          - data:
+              value: "580"
+            action: number.set_value
+            target:
+              entity_id: number.scent_diffuser_deep_sleep_duration_minutes
+          - action: switch.turn_on
+            data: {}
+            target:
+              entity_id: switch.scent_diffuser_deep_sleep
+          - action: logbook.log
+            metadata: {}
+            data:
+              name: srakhrakhok
+              message: 9PM Sleep, 570m until 06:30 Tomorrow
+              entity_id: switch.scent_diffuser_deep_sleep
