@@ -14,7 +14,7 @@ This uses a pretty simple setup:
 * The Esphome config exploses the following the the HA frontend:
   * deep_sleep_duration : a number variable to be able to dinamically set the deep sleep duration
   * srakhrakhok (the name is a reference to a sketch from "Haolam Herev") : a switch that sprays the scent by activationg the motor
-  * reset_counters: a switch to reset the daily and total sprays counters
+  * reset_daily_counter and reset_total_counter: switches to reset the daily and total spray counters
   * deep_sleep_switch : a switch to enter deep sleep, for the period configured in deep_sleep_duration
 
 # Sensors
